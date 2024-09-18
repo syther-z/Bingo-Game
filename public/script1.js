@@ -3,6 +3,9 @@ document.body.onload = main;
 
 var winningColor = "#280b42";
 
+var mid_color = "rgb(168, 161, 230)";
+var final_color = "rgb(32, 85, 4)";
+
 var boxes = document.getElementsByClassName("boxes");
 var board = document.getElementsByClassName("board")[0];
 var words = document.getElementsByClassName("words");
@@ -24,9 +27,9 @@ for(let i = 0; i < boxes.length; i++){
 }
 }
 
-async function eye(){
-for(let i = 0; i < 100; i--){
-    await sleep(2000);
+function eye(){
+// for(let i = 0; i < 100; i--){
+//     await sleep(2000);
  
     let inc = isWinning();
     if(inc>0)
@@ -37,17 +40,15 @@ for(let i = 0; i < 100; i--){
         location.reload();
     }
    var myttt =  document.getElementsByClassName("myttttt")[0];
-    if(myTurn==roundTurn){
-        myttt.textContent = "Turn: 🟢";
-        // board.classList.remove("no-animation");
-    } else{
-         myttt.textContent = "Turn: 🔴";
-        // board.classList.add("no-animation");
-    }
-}
-
+    myttt.textContent = "Turn: 🔴";
+// }
 
 }
+
+socket.on("winnnerAnn", mess=>{
+    alert("Player Wons "+mess);
+    location.reload();
+})
 
 
 
@@ -70,12 +71,15 @@ for(let i = 0; i < boxes.length; i++){
     boxes[i].addEventListener("click", event=>{
 
         if(myTurn!=roundTurn) return;
-        if(boxes[i].innerHTML==="") return;
+        // if(boxes[i].innerHTML==="") return;
+        // console.log(boxes[i].style.backgroundColor);
+        if(boxes[i].style.backgroundColor!=="") return;
 
-        boxes[i].style.backgroundColor = "purple";
+        boxes[i].style.backgroundColor = mid_color;
         let cc = (pairCode!=undefined) ? pairCode : pC;
         socket.emit("gameBox", [boxes[i].innerHTML, cc]);
-        boxes[i].innerHTML = "";
+        // boxes[i].innerHTML = "";
+        eye();
     })
 }
 
@@ -87,7 +91,7 @@ for(let i = string.length-1; i>=0; i--){
     if(string[i]==='=') break;
      x = string[i]+x;
 }
-console.log(x);
+// console.log(x);
 pairCode = parseInt(x);
 }
 
@@ -97,16 +101,19 @@ socket.on("removeValue", val=>{
     // console.log("yes");
     for(let i = 0; i < boxes.length; i++){
         if(boxes[i].innerHTML===val){
-            boxes[i].innerHTML = "";
-            boxes[i].style.backgroundColor = "purple";
+            // boxes[i].innerHTML = "";
+            if(boxes[i].style.backgroundColor=="")boxes[i].style.backgroundColor = mid_color;
             break;
         }
     }
+    eye();
 })
 
 
 socket.on("turnChange", mess=>{
     roundTurn = mess;
+    var myttt =  document.getElementsByClassName("myttttt")[0];
+    myttt.textContent  = (myTurn==mess) ? "Turn: 🟢" : "Turn: 🔴";
 })
 
 
@@ -117,36 +124,51 @@ socket.on("turnChange", mess=>{
 // 20 21 22 23 24
 
 
-
 function isWinning(){
     let totalSum = 0;
     for(let i = 0; i < 5; i++){
         let sum = 0;
         for(let j = i*5; j < ((i*5)+5); j++){
-            if(boxes[j].style.backgroundColor==="purple")sum++;
+            if(boxes[j].style.backgroundColor===mid_color || boxes[j].style.backgroundColor===final_color)sum++;
         }
-        if(sum==5) totalSum++;
+        if(sum==5){ totalSum++;
+            for(let j = i*5; j < ((i*5)+5); j++){
+               boxes[j].style.backgroundColor=final_color;
+            }
+        }
     }
 
 
     for(let i = 0; i < 5; i++){
         let sum = 0;
         for(let j = i; j <= (i+20); j+=5){
-            if(boxes[j].style.backgroundColor==="purple")sum++;
+            if(boxes[j].style.backgroundColor===mid_color || boxes[j].style.backgroundColor===final_color)sum++;
         }
-        if(sum==5) totalSum++;
+        if(sum==5){ totalSum++;
+            for(let j = i; j <= (i+20); j+=5){
+                boxes[j].style.backgroundColor=final_color;
+            }
+        }
     }
 
      let x = 0;
      for(let i = 0; i < 25; i+=6){
-        if(boxes[i].style.backgroundColor==="purple")x++;
+        if(boxes[i].style.backgroundColor===mid_color || boxes[i].style.backgroundColor===final_color)x++;
      }
-     if(x==5)totalSum++;
+     if(x==5){totalSum++;
+        for(let i = 0; i < 25; i+=6){
+           boxes[i].style.backgroundColor=final_color;
+         }
+     }
      x = 0;
      for(let i = 4; i <= 20; i+=4){
-        if(boxes[i].style.backgroundColor==="purple")x++;
+        if(boxes[i].style.backgroundColor===mid_color || boxes[i].style.backgroundColor===final_color)x++;
      }
-     if(x==5)totalSum++;
+     if(x==5){totalSum++;
+        for(let i = 4; i <= 20; i+=4){
+            boxes[i].style.backgroundColor=final_color;
+         }
+     }
 
 
   return totalSum;

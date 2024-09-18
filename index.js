@@ -54,11 +54,12 @@ io.on("connection", socket=>{
         for(let i = 1; i < socketList[code].length; i++){
             socketList[code][i].emit("metaRefresh", "flex");
         }
+        socket.emit("turnChange", playerTurn[code]);
     })
 
 
  socket.on("gameBox", mess=>{
-    console.log(mess);
+    // console.log(mess);
     if(pairCodeList.includes(mess[1])){
         playerTurn[mess[1]]++;
         if(playerTurn[mess[1]]>socketList[mess[1]].length) playerTurn[mess[1]] = 1;
@@ -103,7 +104,7 @@ io.on("connection", socket=>{
  for(let i = 0; i < pairCodeList.length; i++){
         let x = pairCodeList[i];
         if(socketList[x].length==0){
-            delete socketList[x];
+            // delete socketList[x];
             removeUser(pairCodeList, i);
         }
         for(let j = 0; j < socketList[x].length; j++){

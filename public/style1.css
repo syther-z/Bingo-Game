@@ -48,6 +48,7 @@ body{
     height: 50px;
     width: 50px;
     box-sizing: border-box;
+    /* background-color: rgb(58, 133, 18); */
     background-color: rgb(94, 79, 226);
     /* border: 1px solid white; */
     border: none;
