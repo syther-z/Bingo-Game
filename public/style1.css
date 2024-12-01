@@ -9,7 +9,7 @@ body{
     height: 100vh;
     width: 100vw;
     background-color: rgb(200, 198, 198);
-    /* background-color: aquamarine; */
+    /* background-color: rgb(39, 39, 39); */
     display: none;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,18 @@ body{
     gap: 5px;
     position: absolute;
     top: 0;
+}
+
+@keyframes tilesAnimation {
+    0%{
+        scale: 1;
+    }
+    50%{
+        scale: 1.1;
+    }
+    100%{
+        scale: 1;
+    }
 }
 
 #bingo > p{
@@ -58,6 +70,7 @@ body{
     color: white;
     font-size: 1.2rem;
     border-radius: 18%;
+    animation: tilesAnimation .5s linear;
 }
 
 .words{
@@ -70,4 +83,84 @@ body{
     color: black;
    font-size: 1.1rem;
    font-weight: 700;
+}
+
+.conclusion{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(44, 43, 43);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 201;
+    gap: 50px;
+}
+
+.result{
+    color: white;
+    font-size: 5vh;
+}
+#goToHome{
+    color: white;
+    /* background-color: darkolivegreen; */
+    background-color: rgb(89, 110, 53);
+    box-shadow: 0px 10px 0px -1px rgb(60, 76, 33);
+}
+
+#goToHome:active{
+    translate: 0px 5px;
+    box-shadow: 0px 5px 0px -1px rgb(60, 76, 33);
+}
+
+.titleContainer{
+    color: white;
+    font-size: 5vh;
+    transition: all 1s linear;
+}
+.titleContainer::after{
+    content: "|";
+    font-weight: 100;
+    animation: cursor .8s linear infinite
+}
+
+@keyframes cursor {
+    0%{
+        opacity: 0%;
+    }
+    100%{
+        opacity: 100%;
+    }
+}
+
+.timer{
+    background-color: rgb(200, 198, 198);
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 1.2rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* position: absolute; */
+    /* top: 20px;
+    right: 20px; */
+}
+
+.timerCircle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rebeccapurple;
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: conic-gradient(rgb(255, 255, 255) 0turn 0deg, #025f00 0turn);
 }

@@ -11,6 +11,12 @@ var noOfPlaye = document.getElementsByClassName("noOfPlaye")[0];
 var pairCode;
 var submit = document.getElementById("submit");
 var container = document.getElementsByClassName("container")[0];
+var conclusion = document.getElementsByClassName("conclusion")[0];
+var result = document.getElementsByClassName("result")[0];
+var goToHome = document.getElementById("goToHome");
+var gameTitle = document.getElementsByClassName('titleContainer')[0];
+var timeCounter = document.getElementsByClassName("timer")[0];
+var timerCircle = document.getElementsByClassName("timerCircle")[0];
 const socket = io();
 
 btn1.addEventListener("click", event=>{
@@ -57,7 +63,10 @@ socket.on("metaRefresh", mess=>{
  
 start.addEventListener("click", event=>{
     socket.emit("allStart", pairCode);
-    container.style.display = "flex";
+    // container.style.display = "flex";
+    timeTerminater = false;
+        timerCircle.style.display = "flex";
+       
 })
 
 
@@ -74,15 +83,36 @@ function rand(){
 
 
 socket.on("shiftTurn", (e)=>{
-    // console.log("Hello");
      myTurn--;
 })
-// socket.on("disconnect", ()=>{
-//         socket.emit("dis", "hello");
+
+
+// socket.on("winnerAnn", mess=>{
+//     // alert("Player "+mess);
+//    resultMessage(mess);
 // })
 
-
-socket.on("winnerAnn", mess=>{
-    alert("Player "+mess);
+goToHome.addEventListener("click", event=>{
     location.reload();
-})
+});
+
+function resultMessage(mess){
+    conclusion.style.display = "flex";
+    result.innerHTML = mess;
+}
+
+
+
+async function writingEffect (ms){
+    word = "BINGO...";
+//    gameTitle.innerHTML = "";
+    for(let i = 0; i < 10; i--){
+        if(i==-100) i = 0;
+        for(let j = 0; j < word.length; j++){
+            gameTitle.textContent+=word[j];
+           await sleep(ms);
+        }
+        await sleep(2*ms);
+        gameTitle.textContent = "";
+    }
+}
