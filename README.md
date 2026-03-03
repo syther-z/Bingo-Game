@@ -5,6 +5,8 @@ Game ScreenShots:-
 ![alt text](https://github.com/syther-z/Bingo-Game/blob/main/HomeUI.png?raw=true)<br>
 ![alt text](https://github.com/syther-z/Bingo-Game/blob/main/GameUI.png?raw=true)
 <br><br>
+[![Live Play](https://render.com/images/deploy-to-render-button.svg)](https://bingo-game-mcu4.onrender.com)
+<br><br>
 ### Instructions
 1. To Run the Game on Your Device install ```NODE JS```.<br>
 2. Open the Project Folder and Run ```npm install```. It will install required Dependencies that required for game.<br>
