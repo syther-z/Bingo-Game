@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+  
+  .title-main{
+    @apply text-white inline-flex justify-center items-center bg-(--title-color) rounded-[10px];
+  }
+  .title-sec{
+    @apply text-white inline-flex justify-center items-center border-1 border-(--title-color) rounded-[10px];
+  }

@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+:root{
+  --homepage-color: #232323;
+  --title-color: #00c8ff;
+  --tilePassiveColor: #0875f1;
+  --tileActiveColor: rgb(118 185 57);
+  --tileSelectedColor: rgb(111, 114, 110);
+}

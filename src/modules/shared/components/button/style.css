@@ -1,0 +1,19 @@
+
+
+.tile-passive{
+    background: var(--tilePassiveColor);
+    box-shadow: 0 0 5px var(--tilePassiveColor), 0 8px 0 0 #0755ad;
+    translate: 0 0;
+}
+
+.tile-active{
+    background: var(--tileActiveColor);
+    box-shadow: 0 0 5px var(--tileActiveColor), 0 4px 0 0 green;
+    translate: 0 4px;
+}
+
+.tile-selected{
+    background: var(--tileSelectedColor);
+    box-shadow: 0 0 5px var(--tileSelectedColor), 0 4px 0 0 rgb(76, 77, 76);
+    translate: 0 4px;
+}

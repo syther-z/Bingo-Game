@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.bg-image{
+  background: url('./assets/bg.jpg');
+  background-size: contain;
+}
+
+.head-text-size{
+  font-size: clamp(16px, 6vw, 40px);
+  font-weight: bold;
+}
+
+.button-text-size{
+  font-size: clamp(12px, 5vw, 22px);
+  font-weight: bold;
+}
+
+.title-box{
+  width: clamp(45px, 6.5vw, 60px);
+  height: clamp(45px, 6.5vw, 60px);
+}

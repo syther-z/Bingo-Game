@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+
+.title-box{
+  width: clamp(45px, 6.5vw, 60px);
+  height: clamp(45px, 6.5vw, 60px);
+}
