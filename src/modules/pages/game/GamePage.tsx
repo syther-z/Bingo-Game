@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getGridValue } from "../../shared/utils/gridValueGenerator";
 import './style.css';
 import GameGrid from "../../shared/components/grid/GameGrid";
@@ -11,15 +11,16 @@ import { calculateBingo, fill, markNum, unmarkNum } from "../../redux/slice/Tile
 import GameHandler from "../../shared/handler/GameHandler";
 import TimeHandler from "../../shared/handler/TimeHandler";
 import { Const } from "../../shared/static/constants";
+import Background from "../../shared/components/background/Background";
 // import GameHandler from "../../shared/handler/roomHandler";
 // import TileState from "../../shared/state/TileState";
 const GamePage = () => {
     const { roomid } = useParams();
     const tileSlice = useSelector((state: RootState) => state.tileSlice);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showTimer, setShowTimer] = useState(GameHandler.getTurn() === GameHandler.getCurrentTurn());
     const [remaining, setRemaining] = useState(Const.gameTimer);
-    const [update, setUpdate] = useState(false);
 
     useEffect(() => {
 
@@ -57,16 +58,20 @@ const GamePage = () => {
         });
 
         const unsub2 = GameHandler.onTurnChange(() => f());
-
+        const unsub3 = GameHandler.onWinnerChange((data) => {
+            navigate(`/win?winnername=${data.name}&id=${data.id}`);
+        });
         return () => {
             unsub();
             unsub2();
+            unsub3();
         }
     }, []);
 
 
   return (
-    <div className="bg-(--homepage-color) w-screen h-screen flex flex-col gap-4 justify-center items-center">
+    <div className="w-screen h-screen flex flex-col gap-4 justify-center items-center">
+        <Background />
       <BingoTitle fill={tileSlice.bingo} />
       <GameGrid valArr={tileSlice.value}/>
       <div className="w-[60px] h-[60px] absolute top-5 right-5">

@@ -17,7 +17,7 @@ const PlayerList = () => {
   return (
     <div className="max-w-[700px] w-full">
         <div className="text-white font-bold mb-2">Players</div>
-        <div className="w-full h-[260px] rounded-[12px] border border-[#3a3a3a] bg-[#252424] p-3">
+        <div className="w-full h-[260px] rounded-[12px] border border-[#3a3a3a] bg-[#252424] opacity-20 p-3">
           {players.length === 0 ? (
             <div className="h-full w-full border border-dashed border-[#3a3a3a] rounded-[10px] flex items-center justify-center text-gray-400 text-sm">
               Waiting for players to join…

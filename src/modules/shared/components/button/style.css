@@ -1,4 +1,11 @@
-
+.primary-style{
+    letter-spacing: 0.18rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-family: 16px !important;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
 
 .tile-passive{
     background: var(--tilePassiveColor);

@@ -49,7 +49,7 @@ const JoinPage = () => {
         zColor={"rgba(155,0,0,1)"}
         onClick={handleJoin}
       >
-        Join Room
+        Join Room  <i className="fa-solid fa-arrow-right"></i>
       </PrimaryButton>
     </div>
   );

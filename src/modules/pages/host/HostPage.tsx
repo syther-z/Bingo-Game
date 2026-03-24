@@ -3,6 +3,7 @@ import PlayerList from '../../shared/components/list/PlayerList';
 import PrimaryButton from '../../shared/components/button/PrimaryButton';
 import GameHandler from '../../shared/handler/GameHandler';
 import { useEffect } from 'react';
+import Background from '../../shared/components/background/Background';
 const HostPage = () => {
     const { roomid } = useParams();
     const navigate = useNavigate();
@@ -16,7 +17,8 @@ const HostPage = () => {
     
 
   return (
-    <div className='w-screen h-screen bg-(--homepage-color) p-5 flex flex-col gap-5 items-center'>
+    <div className='w-screen h-screen p-5 flex flex-col gap-5 items-center'>
+      <Background />
         {/* <h2 className='text-center text-[35px] font-bold text-white'>Room ID</h2> */}
         <div>{
         titleMain.split('').map((char, i) => {
@@ -41,7 +43,7 @@ const HostPage = () => {
           zColor={'rgb(103 43 243)'}
           onClick={() => GameHandler.startGame()}
         >
-          Start
+          Start <i className="fa-solid fa-arrow-right"></i>
         </PrimaryButton>
 
         <PlayerList/>

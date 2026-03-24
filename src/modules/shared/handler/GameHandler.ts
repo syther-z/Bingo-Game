@@ -17,7 +17,8 @@ const GameEvent = {
     RPLAYERJOIN: 'r-player-join',
     PLAYERCOUNT: 'player-count',
     STURNCHANGE: 's-turn-change',
-    RTURNCHANGE: 'r-turn-change'
+    RTURNCHANGE: 'r-turn-change',
+    SWINNER: 's-winner'
 };
 
 class GameHandler{
@@ -32,7 +33,7 @@ class GameHandler{
     getCurrentTurn = () => this.#currentTurn;
 
     hydrateFromStorage() {
-        this.#name = localStorage.getItem('player-name') ?? `Player-${RemoteServer.getID()?.substring(0, 4)}`;
+        this.#name = localStorage.getItem('player-name') ?? ``;
         localStorage.setItem('player-name', this.#name);
     }
 
@@ -93,6 +94,12 @@ class GameHandler{
         });
     }
 
+    iAmWinner(){
+        return RemoteServer.emit(GameEvent.SWINNER, {
+            roomID: this.getRoomID()
+        });
+    }
+
     // onTurnChange
 
     onMarkNumber(callback: callbackType){
@@ -125,6 +132,12 @@ class GameHandler{
         return RemoteServer.on(GameEvent.RTURNCHANGE, data => {
             const { currentTurn } = data;
             this.#currentTurn = currentTurn;
+            callback(data);
+        });
+    }
+
+    onWinnerChange(callback: callbackType){
+        return RemoteServer.once(GameEvent.RWINNER, data => {
             callback(data);
         });
     }

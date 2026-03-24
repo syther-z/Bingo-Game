@@ -1,4 +1,4 @@
-import React, { useState, type MouseEventHandler } from "react";
+import React, { useEffect, useState, type MouseEventHandler } from "react";
 import "./style.css";
 
 
@@ -12,7 +12,12 @@ type primaryType = {
 
 const PrimaryButton = (props : primaryType) => {
   const [isDown, setIsDown] = useState(false);
-
+  useEffect(() => {
+    const unsub = document.addEventListener('pointerup', () => {
+      setIsDown(false);
+    });
+    () => removeEventListener("pointerup", unsub!);
+  }, []);
   return (
     <button
       style={{
@@ -25,9 +30,9 @@ const PrimaryButton = (props : primaryType) => {
       }}
       onClick={props.onClick}
       onPointerDown={() => setIsDown(true)}
-      onPointerUp={() => setIsDown(false)}
-      className="text-white bg-red-400 h-[50px] rounded-[10px] w-[150px] button-text-size
-        transition-all duration-200
+      // onPointerUp={() => setIsDown(false)}
+      className="text-white bg-red-400 h-[50px] rounded-[10px] min-w-[150px]
+        transition-all duration-200 primary-style px-2
         "
     >
       {props.children}

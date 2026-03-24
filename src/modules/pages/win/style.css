@@ -1,36 +1,21 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Space+Grotesk:wght@400;600;700&display=swap");
 
 .win-page {
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at top, rgba(102, 255, 234, 0.18), transparent 55%),
-    radial-gradient(circle at 20% 80%, rgba(255, 164, 248, 0.2), transparent 60%),
-    #0f1117;
-  color: #f7f4ff;
-  font-family: "Space Grotesk", "Trebuchet MS", Verdana, sans-serif;
+  background: var(--homepage-color);
+  color: #f3f3f3;
+  font-family: monospace;
 }
 
-.win-page::before {
-  content: "";
-  position: absolute;
-  inset: -20% 0 0 -10%;
-  background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.12), transparent 40%),
-    radial-gradient(circle at 75% 30%, rgba(79, 140, 255, 0.18), transparent 45%),
-    radial-gradient(circle at 40% 70%, rgba(255, 110, 255, 0.18), transparent 50%);
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.win-confetti {
+.win-grid {
   position: absolute;
   inset: 0;
-  background:
-    repeating-linear-gradient(120deg, rgba(255, 196, 87, 0.24) 0 8px, transparent 8px 24px),
-    repeating-linear-gradient(-120deg, rgba(61, 214, 255, 0.18) 0 6px, transparent 6px 20px);
-  opacity: 0.25;
-  mix-blend-mode: screen;
-  animation: confetti-shift 14s linear infinite;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.2;
   pointer-events: none;
 }
 
@@ -39,38 +24,36 @@
 }
 
 .win-card {
-  background: rgba(14, 16, 24, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 28px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45), 0 0 40px rgba(93, 212, 255, 0.18);
-  backdrop-filter: blur(14px);
+  background: #1f1f1f;
+  border: 1px solid #3a3a3a;
+  border-radius: 18px;
+  box-shadow: 0 14px 0 #1a1a1a, 0 24px 35px rgba(0, 0, 0, 0.4);
 }
 
-.win-badge {
+.win-pill {
   display: inline-flex;
   align-items: center;
   padding: 6px 14px;
-  border-radius: 999px;
-  background: linear-gradient(120deg, rgba(255, 214, 102, 0.28), rgba(255, 124, 234, 0.35));
-  color: #ffeec2;
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  border-radius: 10px;
+  background: var(--tileActiveColor);
+  box-shadow: 0 6px 0 green;
+  color: #0f1f0a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  font-weight: 600;
 }
 
 .win-title {
   margin-top: 12px;
-  font-family: "Bungee Shade", "Trebuchet MS", sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.8rem);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.2em;
 }
 
 .win-subtitle {
   margin-top: 10px;
-  font-size: 1.1rem;
-  color: rgba(243, 244, 255, 0.78);
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.7);
   max-width: 420px;
 }
 
@@ -81,69 +64,65 @@
 }
 
 .win-bingo-tile {
-  width: clamp(48px, 7vw, 64px);
-  height: clamp(48px, 7vw, 64px);
-  border-radius: 14px;
+  width: clamp(46px, 7vw, 60px);
+  height: clamp(46px, 7vw, 60px);
+  border-radius: 8px;
   display: grid;
   place-items: center;
   font-weight: 700;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  color: #0d0b14;
-  background: linear-gradient(145deg, #9efcff, #ffb6f5);
-  box-shadow: 0 10px 25px rgba(36, 255, 251, 0.35);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: #ffffff;
+  background: var(--tilePassiveColor);
+  box-shadow: 0 8px 0 #0755ad;
 }
 
 .win-room-tag {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }
 
 .win-room-tag span {
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.win-trophy-block {
+.win-stamp {
+  min-width: 200px;
+  height: 200px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  min-width: 220px;
+  background: #2a2a2a;
+  border: 2px solid var(--tileActiveColor);
+  box-shadow: 0 10px 0 #1f1f1f, 0 0 20px rgba(118, 185, 57, 0.3);
+  color: var(--tileActiveColor);
+  font-size: 3rem;
 }
 
-.win-trophy-ring {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at 30% 30%, #fff0b3, #ff9fd8 55%, #7cd7ff 100%);
-  color: #111;
-  font-size: 3.2rem;
-  box-shadow: 0 18px 30px rgba(255, 171, 84, 0.35), 0 0 40px rgba(90, 213, 255, 0.4);
-  animation: trophy-float 5s ease-in-out infinite;
-}
-
-.win-trophy-caption {
+.win-stamp-text {
   font-size: 0.9rem;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  letter-spacing: 0.26em;
-  color: rgba(255, 255, 255, 0.7);
+  color: #ccecb0;
 }
 
 .win-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 
 .win-stat {
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #2b2b2b;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 8px 0 #1f1f1f;
 }
 
 .win-stat-label {
@@ -157,7 +136,7 @@
   display: block;
   margin-top: 6px;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .win-actions {
@@ -169,62 +148,38 @@
 .win-btn-primary,
 .win-btn-ghost {
   border: none;
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 12px 22px;
-  font-size: 0.95rem;
-  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .win-btn-primary {
-  background: linear-gradient(120deg, #ffb574, #ff7edc);
-  color: #1a0f1d;
-  box-shadow: 0 14px 30px rgba(255, 141, 186, 0.35);
+  background: var(--tileActiveColor);
+  color: #0f1f0a;
+  box-shadow: 0 8px 0 green;
 }
 
 .win-btn-ghost {
-  background: rgba(255, 255, 255, 0.06);
-  color: #f8f1ff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--tilePassiveColor);
+  color: #ffffff;
+  box-shadow: 0 8px 0 #0755ad;
 }
 
 .win-btn-primary:hover,
 .win-btn-ghost:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
-}
-
-@keyframes confetti-shift {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-120px);
-  }
-}
-
-@keyframes trophy-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 768px) {
-  .win-trophy-block {
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-
-  .win-trophy-ring {
-    width: 120px;
-    height: 120px;
+  .win-stamp {
+    min-width: 160px;
+    height: 160px;
     font-size: 2.4rem;
   }
 }
