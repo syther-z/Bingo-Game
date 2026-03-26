@@ -20,8 +20,8 @@ const WinPage = () => {
   }, []);
 
   return (
-    <div className=" text-white w-screen h-screen flex items-center justify-center">
-      <Background />
+    <div className=" text-white bg-(--homepage-color) w-screen h-screen flex items-center justify-center">
+      {/* <Background /> */}
       <div className="win-grid" aria-hidden="true"></div>
       <div className="win-shell relative z-10 w-full max-w-[900px] px-5">
         <div className="win-card p-6 md:p-10">

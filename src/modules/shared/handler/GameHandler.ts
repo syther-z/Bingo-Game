@@ -2,7 +2,7 @@ import RemoteServer from "../service/RemoteServer";
 import TimeHandler from "./TimeHandler";
 
 type callbackType = (data ?: any) => void;
-
+RemoteServer.connect();
 const GameEvent = {
     SHOST: 's-host-game',
     RHOST: 'r-host-game',
@@ -18,7 +18,8 @@ const GameEvent = {
     PLAYERCOUNT: 'player-count',
     STURNCHANGE: 's-turn-change',
     RTURNCHANGE: 'r-turn-change',
-    SWINNER: 's-winner'
+    SWINNER: 's-winner',
+    RALERT: 'r-alert'
 };
 
 class GameHandler{
@@ -26,14 +27,17 @@ class GameHandler{
     #turn: number = -1;
     #currentTurn: number = -1;
     #name: (null|string) = null;
-
-    getName = () => this.#name;
+    #latency = 0;
+    getName = () => {
+        this.hydrateFromStorage();
+        return this.#name;
+    };
     getRoomID = () => this.#roomID;
     getTurn = () => this.#turn;
     getCurrentTurn = () => this.#currentTurn;
 
     hydrateFromStorage() {
-        this.#name = localStorage.getItem('player-name') ?? ``;
+        this.#name = localStorage.getItem('player-name') || `Player-${(Math.random() * 10000).toFixed(0)}`;
         localStorage.setItem('player-name', this.#name);
     }
 
@@ -41,10 +45,11 @@ class GameHandler{
         if(roomID < 100000) return false;
         this.#roomID = roomID;
         this.hydrateFromStorage();
-        const res = await RemoteServer.connect();
+        // const res = await RemoteServer.connect();
         RemoteServer.emit(GameEvent.SHOST, {
             roomID: this.getRoomID(),
-            name: this.getName()
+            name: this.getName(),
+            startTime: Date.now()
         });
 
         // RemoteServer.once(GameEvent.RHOST, data => {
@@ -59,10 +64,11 @@ class GameHandler{
         
         try {
             this.hydrateFromStorage();
-            const res = await RemoteServer.connect();
+            // const res = await RemoteServer.connect();
             RemoteServer.emit(GameEvent.SJOIN, {
                 roomID: this.getRoomID(),
-                name: this.getName()
+                name: this.getName(),
+                startTime: Date.now()
             });
 
             RemoteServer.on(GameEvent.RJOIN, data => {
@@ -138,6 +144,12 @@ class GameHandler{
 
     onWinnerChange(callback: callbackType){
         return RemoteServer.once(GameEvent.RWINNER, data => {
+            callback(data);
+        });
+    }
+
+    onAlertChange(callback: callbackType){
+        return RemoteServer.on(GameEvent.RALERT, data => {
             callback(data);
         });
     }

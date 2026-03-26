@@ -32,7 +32,7 @@ const PrimaryButton = (props : primaryType) => {
       onPointerDown={() => setIsDown(true)}
       // onPointerUp={() => setIsDown(false)}
       className="text-white bg-red-400 h-[50px] rounded-[10px] min-w-[150px]
-        transition-all duration-200 primary-style px-2
+        transition-all duration-200 primary-style px-2 load-animation pixelify-sans
         "
     >
       {props.children}

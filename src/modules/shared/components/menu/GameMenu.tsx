@@ -9,7 +9,7 @@ const GameMenu = () => {
   return (
     <div className="w-full flex justify-center gap-3">
       <PrimaryButton
-        style={{}}
+        style={{animationDuration: '200ms'}}
         backgroundColor={"rgb(4 125 211)"}
         zColor={"rgb(1 85 145)"}
         onClick={() => {
@@ -21,7 +21,7 @@ const GameMenu = () => {
         Host
       </PrimaryButton>
       <PrimaryButton
-        style={{}}
+        style={{animationDuration: '300ms'}}
         backgroundColor={"rgba(255,93,93,1)"}
         zColor={"rgba(155,0,0,1)"}
         onClick={() => navigate("/join")}

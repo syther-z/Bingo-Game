@@ -109,7 +109,7 @@ const tileSlice = createSlice({
 
     },
 
-    clear: () => initialValue
+    clear: () => ({ value: [], bingo: 0 })
   },
 });
 

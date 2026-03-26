@@ -10,7 +10,7 @@ const TileButton = ({val, onClick} : tileType) => {
   return (
     <button
       onClick={(e) => onClick(e)}
-      className={`rounded-[7px] transition-all duration-200 ${val.selected ? 'tile-selected' :  (val.marked) ? 'tile-active' : 'tile-passive'}`}
+      className={`cursor-pointer rounded-[7px] transition-all duration-200 ${val.selected ? 'tile-selected' :  (val.marked) ? 'tile-active' : 'tile-passive'}`}
     >
       {val.num}
     </button>

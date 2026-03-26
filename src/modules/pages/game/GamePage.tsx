@@ -7,7 +7,7 @@ import BingoTitle from "../../shared/components/title/BingoTitle";
 import GameTimer from "../../shared/components/timer/GameTimer";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { calculateBingo, fill, markNum, unmarkNum } from "../../redux/slice/TileSlice";
+import { calculateBingo, clear, fill, markNum, unmarkNum } from "../../redux/slice/TileSlice";
 import GameHandler from "../../shared/handler/GameHandler";
 import TimeHandler from "../../shared/handler/TimeHandler";
 import { Const } from "../../shared/static/constants";
@@ -21,9 +21,12 @@ const GamePage = () => {
     const navigate = useNavigate();
     const [showTimer, setShowTimer] = useState(GameHandler.getTurn() === GameHandler.getCurrentTurn());
     const [remaining, setRemaining] = useState(Const.gameTimer);
-
+    if(tileSlice.bingo === 5){
+        GameHandler.iAmWinner();
+        // navigate(`/win?winnername=${GameHandler.getName()}&id=${GameHandler.get}`);
+    }
     useEffect(() => {
-
+        dispatch(clear());
         dispatch(fill());
         const tCallback = (duration: number) => {
             setRemaining(duration);

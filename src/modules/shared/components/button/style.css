@@ -7,6 +7,10 @@
     color: rgb(255, 255, 255);
 }
 
+.primary-style:hover{
+    scale: 1.05;
+}
+
 .tile-passive{
     background: var(--tilePassiveColor);
     box-shadow: 0 0 5px var(--tilePassiveColor), 0 8px 0 0 #0755ad;

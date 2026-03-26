@@ -8,9 +8,12 @@ import Handler from './modules/shared/components/layer/Handler';
 import LobbyPage from './modules/pages/lobby/LobbyPage';
 import GamePage from './modules/pages/game/GamePage';
 import WinPage from './modules/pages/win/WinPage';
+import Navbar from './modules/shared/components/navbar/Navbar';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
-    return <BrowserRouter>
+    return <AnimatePresence mode='wait'>
+    <BrowserRouter>
       <Handler />
       <Routes>
         <Route path='/' element={<HomePage/>} />
@@ -21,7 +24,8 @@ function App() {
         <Route path='/win' element={<WinPage />} />
         {/* <Outlet /> */}
       </Routes>
-    </BrowserRouter>;
+    </BrowserRouter>
+    </AnimatePresence>;
 }
 
 export default App
