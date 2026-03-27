@@ -1,84 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getGridValue } from "../../shared/utils/gridValueGenerator";
 import './style.css';
 import GameGrid from "../../shared/components/grid/GameGrid";
 import BingoTitle from "../../shared/components/title/BingoTitle";
 import GameTimer from "../../shared/components/timer/GameTimer";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { calculateBingo, clear, fill, markNum, unmarkNum } from "../../redux/slice/TileSlice";
-import GameHandler from "../../shared/handler/GameHandler";
-import TimeHandler from "../../shared/handler/TimeHandler";
-import { Const } from "../../shared/static/constants";
 import Background from "../../shared/components/background/Background";
+import useGamePage from "../../shared/hooks/useGame";
+import { useEffect, useRef } from 'react';
+import GameHandler from '../../shared/handler/GameHandler';
 // import GameHandler from "../../shared/handler/roomHandler";
 // import TileState from "../../shared/state/TileState";
 const GamePage = () => {
-    const { roomid } = useParams();
     const tileSlice = useSelector((state: RootState) => state.tileSlice);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [showTimer, setShowTimer] = useState(GameHandler.getTurn() === GameHandler.getCurrentTurn());
-    const [remaining, setRemaining] = useState(Const.gameTimer);
-    if(tileSlice.bingo === 5){
-        GameHandler.iAmWinner();
-        // navigate(`/win?winnername=${GameHandler.getName()}&id=${GameHandler.get}`);
-    }
+    const [showTimer, remaining] = useGamePage();
+    const skipFirstRender = useRef(false);
     useEffect(() => {
-        dispatch(clear());
-        dispatch(fill());
-        const tCallback = (duration: number) => {
-            setRemaining(duration);
-            if(duration <= 1) {
-                setShowTimer(false);
-                timer.shutDown();
-                GameHandler.skipMyTurn();
-            }
+        console.log('Tile Value: ',tileSlice.bingo, skipFirstRender.current);
+        if(tileSlice.bingo === 5 && skipFirstRender.current){
+            console.log('i am in');
+            GameHandler.iAmWinner();
         }
-        const f = () => {
-            if(GameHandler.isMyTurn()){
-                setRemaining(() => Const.gameTimer);
-                setShowTimer(() => true);
-                timer.shutDown();
-                timer.exec(tCallback);
-            } else {
-                timer.shutDown();
-                setShowTimer(() => false);
-            };
-        }
-        const timer = new TimeHandler(Const.gameTimer);
-        if(GameHandler.isMyTurn()) timer.exec(tCallback);
-
-        //MARK NUMBER
-        const unsub = GameHandler.onMarkNumber((data) => {
-            console.log('Recieved Data',data);
-            const { valid, num } = data;
-
-            if(valid) dispatch(markNum(num)); else dispatch(unmarkNum(num));
-            f();
-            dispatch(calculateBingo());
-        });
-
-        const unsub2 = GameHandler.onTurnChange(() => f());
-        const unsub3 = GameHandler.onWinnerChange((data) => {
-            navigate(`/win?winnername=${data.name}&id=${data.id}`);
-        });
-        return () => {
-            unsub();
-            unsub2();
-            unsub3();
-        }
-    }, []);
-
-
+        skipFirstRender.current = true;
+    }, [tileSlice.bingo]);
   return (
     <div className="w-screen h-screen flex flex-col gap-4 justify-center items-center">
         <Background />
       <BingoTitle fill={tileSlice.bingo} />
-      <GameGrid valArr={tileSlice.value}/>
+      <div className="w-full flex">
+        <div className="flex-1 h-full flex justify-center">
+            <div className="md:w-[250px] h-[350px] bg-[#2623244f] rounded-2xl">
+                <span className="text-black bg-pink-100 w-full h-[30px] inline-flex rounded justify-center items-center">Player-13344</span>
+            </div>
+        </div>
+        <GameGrid valArr={tileSlice.value}/>
+        <div className="flex-1 h-full"></div>
+      </div>
       <div className="w-[60px] h-[60px] absolute top-5 right-5">
-        {showTimer && <GameTimer durationSeconds={12} remaining={remaining} />}
+        {showTimer && <GameTimer durationSeconds={12} remaining={remaining as number} />}
       </div>
     </div>
   );

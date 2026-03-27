@@ -7,13 +7,17 @@ import GameHandler from "../../shared/handler/GameHandler";
 import RemoteServer from "../../shared/service/RemoteServer";
 import Background from "../../shared/components/background/Background";
 import Navbar from "../../shared/components/navbar/Navbar";
+import { useDispatch } from "react-redux";
+import { clear } from "../../redux/slice/TileSlice";
 
 const LobbyPage = () => {
   const { roomid } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const titleMain = "LOBBY";
 
   useEffect(() => {
+    dispatch(clear());
     GameHandler.onStartGame((data) => {
       navigate(`/room/${GameHandler.getRoomID()}`);
     });

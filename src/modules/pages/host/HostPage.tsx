@@ -7,12 +7,16 @@ import Background from '../../shared/components/background/Background';
 import Navbar from '../../shared/components/navbar/Navbar';
 import RemoteServer from '../../shared/service/RemoteServer';
 import useToast from '../../shared/hooks/usetoast';
+import { useDispatch } from 'react-redux';
+import { clear } from '../../redux/slice/TileSlice';
 const HostPage = () => {
     const { roomid } = useParams();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const toast = useToast();
     let titleMain = 'ROOM';
     useEffect(() => {
+      dispatch(clear());
       if(!RemoteServer.isConnected()){
         toast('Server connection failed', { type: 'error' });
       }

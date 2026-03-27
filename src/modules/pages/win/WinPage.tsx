@@ -10,12 +10,14 @@ const WinPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [player, setPlayer] = useState({
     name: '------',
-    id: '-------'
+    id: '-------',
+    roomid: '--------'
   });
   useEffect(() => {
     setPlayer({
       name: searchParams.get('winnername') ?? '-----',
       id: searchParams.get('id') ?? '-----',
+      roomid: searchParams.get('roomid') ?? '------'
     });
   }, []);
 
@@ -43,7 +45,7 @@ const WinPage = () => {
                 ))} */}
               </div>
               <div className="win-room-tag mt-5">
-                Room ID: <span>{(roomid || "----").toUpperCase()}</span>
+                Room ID: <span>{(player.roomid).toUpperCase()}</span>
               </div>
             </div>
 

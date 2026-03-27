@@ -72,7 +72,6 @@ class RemoteServer{
         let start = Date.now();
         this.#socket.emit('ping', start, () => {
                 this.#latency = Date.now() - start;
-                console.log(this.getPing());
             });
     }
     getPing = () => this.#latency;
