@@ -24,10 +24,10 @@
 }
 
 .win-card {
-  background: #1f1f1f;
+  background: #1f1f1f29;
   border: 1px solid #3a3a3a;
   border-radius: 18px;
-  box-shadow: 0 14px 0 #1a1a1a, 0 24px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 14px 0 #1a1a1a15, 0 24px 35px rgba(0, 0, 0, 0.406);
 }
 
 .win-pill {
@@ -97,7 +97,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: #2a2a2a;
+  background: #2a2a2a5f;
   border: 2px solid var(--tileActiveColor);
   box-shadow: 0 10px 0 #1f1f1f, 0 0 20px rgba(118, 185, 57, 0.3);
   color: var(--tileActiveColor);
@@ -162,18 +162,22 @@
   background: var(--tileActiveColor);
   color: #0f1f0a;
   box-shadow: 0 8px 0 green;
+  transition: all .2s ease-in-out;
 }
 
 .win-btn-ghost {
   background: var(--tilePassiveColor);
   color: #ffffff;
   box-shadow: 0 8px 0 #0755ad;
+  transition: all .2s ease-in-out;
 }
 
 .win-btn-primary:hover,
 .win-btn-ghost:hover {
-  transform: translateY(2px);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6);
+  scale: 1.05;
+  transition: all .2s ease-in-out;
+  /* transform: translateY(2px); */
+  /* box-shadow: 0 4px 0 rgba(0, 0, 0, 0.6); */
 }
 
 @media (max-width: 768px) {

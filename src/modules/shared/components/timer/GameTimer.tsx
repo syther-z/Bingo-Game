@@ -1,8 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import TimeHandler from "../../handler/TimeHandler";
-import GameHandler from "../../handler/GameHandler";
-// import GameHandler from "../../handler/roomHandler";
-// import TimeHanlder from "../../handler/TimerHandler";
+import { useEffect, useMemo } from "react";
 
 const GameTimer = ({ durationSeconds = 12, remaining }: {durationSeconds: number, remaining: number }) => {
   const percent = useMemo(() => {

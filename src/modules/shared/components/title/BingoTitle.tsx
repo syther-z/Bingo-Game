@@ -1,5 +1,3 @@
-import React from "react";
-
 const BingoTitle = ({ fill = 5}) => {
     const title = ['B','I','N','G','O'];
   return (

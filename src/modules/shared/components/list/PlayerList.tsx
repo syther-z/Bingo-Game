@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
 import GameHandler from "../../handler/GameHandler";
+import RemoteServer from "../../service/RemoteServer";
 const PlayerList = () => {
   const [players, setPlayers] = useState<Array<any>>([]);
   // const players: Array<any> = [];
   // const dispatch = useDispatch();
+  const playerCount = useRef(0);
   useEffect(() => {
     const unsub = GameHandler.onPlayerChange((data) => {
-      const { listOfPlayers } = data;
+      const { listOfPlayers, maxPlayerCount } = data;
       setPlayers(listOfPlayers);
+      playerCount.current = maxPlayerCount;
     });
     return () => unsub();
   }, []);
@@ -19,7 +21,7 @@ const PlayerList = () => {
   ];
   return (
     <div className="max-w-[700px] w-full pixelify-sans">
-        <div className="text-white font-bold mb-2">Players</div>
+        <div className="text-white font-bold mb-2">Players <span className="font-mono">[{players.length}/{playerCount.current}]</span></div>
         <div className="w-full h-[260px] rounded-[12px] border border-[#3a3a3a] bg-[#25242441] p-3">
           {players.length === 0 ? (
             <div className="h-full w-full border border-dashed border-[#3a3a3a] rounded-[10px] flex items-center justify-center text-gray-400 text-sm">
@@ -32,7 +34,7 @@ const PlayerList = () => {
                   key={`${player.id}-${index}`}
                   className="h-[40px] rounded-[6px] px-3 flex items-center justify-between text-[1rem] bg-[#dce1e1]"
                 >
-                  <span className="text-gray-900 font-semibold">{player.name}</span>
+                  <span className="text-gray-900 font-semibold">{RemoteServer.getID() === player.id ? 'YOU' : player.name}</span>
                   <span className="">
                     <span className={`w-[10px] h-[10px] ${pingIndicator[parseInt((Math.min(999, player.ping) / 400).toFixed(0))]} rounded-2xl inline-block`}></span>
                     <span> {player.ping}ms</span>

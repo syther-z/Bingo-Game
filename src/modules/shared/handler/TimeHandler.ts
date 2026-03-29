@@ -1,5 +1,3 @@
-import { Const } from "../static/constants";
-
 class TimeHanlder{
     #interval: (null|number) = null;
     #duration;

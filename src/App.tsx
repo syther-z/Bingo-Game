@@ -1,14 +1,13 @@
-import { useState } from 'react'
 import './App.css'
 import HomePage from './modules/pages/home/HomePage';
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HostPage from './modules/pages/host/HostPage';
 import JoinPage from './modules/pages/join/JoinPage';
 import Handler from './modules/shared/components/layer/Handler';
 import LobbyPage from './modules/pages/lobby/LobbyPage';
 import GamePage from './modules/pages/game/GamePage';
 import WinPage from './modules/pages/win/WinPage';
-import Navbar from './modules/shared/components/navbar/Navbar';
+// import Navbar from './modules/shared/components/navbar/Navbar';
 import { AnimatePresence } from 'framer-motion';
 
 function App() {

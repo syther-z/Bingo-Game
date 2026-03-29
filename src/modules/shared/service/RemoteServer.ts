@@ -7,7 +7,7 @@ class RemoteServer{
     #interval :ReturnType<typeof setInterval>|undefined;
     constructor(connectionString : string){
         this.#socket = io(connectionString, {
-            autoConnect: false
+            autoConnect: true
         });
     }
 

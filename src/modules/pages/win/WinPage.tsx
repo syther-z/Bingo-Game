@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "./style.css";
 import Background from "../../shared/components/background/Background";
 
 const WinPage = () => {
   const navigate = useNavigate();
-  const { roomid } = useParams();
-  const title = "BINGO".split("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const { roomid } = useParams();
+  // const title = "BINGO".split("");
+  const [searchParams] = useSearchParams();
   const [player, setPlayer] = useState({
     name: '------',
     id: '-------',
@@ -22,8 +22,8 @@ const WinPage = () => {
   }, []);
 
   return (
-    <div className=" text-white bg-(--homepage-color) w-screen h-screen flex items-center justify-center">
-      {/* <Background /> */}
+    <div className=" text-white w-screen h-screen flex items-center justify-center">
+      <Background />
       <div className="win-grid" aria-hidden="true"></div>
       <div className="win-shell relative z-10 w-full max-w-[900px] px-5">
         <div className="win-card p-6 md:p-10">

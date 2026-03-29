@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import TileButton from "../button/TileButton";
 import GameHandler from "../../handler/GameHandler";
 import { useDispatch } from "react-redux";
-import { markNum, unmarkNum } from "../../../redux/slice/TileSlice";
+import { markNum } from "../../../redux/slice/TileSlice";
 
 type propsType = {
     valArr: Array<any>

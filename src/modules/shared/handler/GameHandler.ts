@@ -1,5 +1,4 @@
 import RemoteServer from "../service/RemoteServer";
-import TimeHandler from "./TimeHandler";
 
 type callbackType = (data ?: any) => void;
 RemoteServer.connect();
@@ -27,7 +26,6 @@ class GameHandler{
     #turn: number = -1;
     #currentTurn: number = -1;
     #name: (null|string) = null;
-    #latency = 0;
     getName = () => {
         this.hydrateFromStorage();
         return this.#name;
@@ -71,7 +69,7 @@ class GameHandler{
                 startTime: Date.now()
             });
 
-            RemoteServer.on(GameEvent.RJOIN, data => {
+            RemoteServer.on(GameEvent.RJOIN, () => {
                 callback();
             });
         } catch (error) {

@@ -1,6 +1,4 @@
-import React from "react";
 import PrimaryButton from "../button/PrimaryButton";
-// import { getRoomId } from '../../utils/roomIdGenerator';
 import { useNavigate } from "react-router-dom";
 import { getRoomId } from "../../utils/IdGenerator";
 import GameHandler from "../../handler/GameHandler";

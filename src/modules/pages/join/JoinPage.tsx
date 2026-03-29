@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../shared/components/button/PrimaryButton";
 // import "./style.css";
@@ -9,7 +9,7 @@ import Background from "../../shared/components/background/Background";
 const JoinPage = () => {
   const [roomId, setRoomId] = useState("");
   const navigate = useNavigate();
-  const titleMain = "JOIN";
+  // const titleMain = "JOIN";
 
   const handleJoin = async () => {
     if (!roomId.trim()) return;

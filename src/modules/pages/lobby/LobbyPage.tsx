@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../shared/components/button/PrimaryButton";
 // import "./style.css";
@@ -14,11 +14,11 @@ const LobbyPage = () => {
   const { roomid } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const titleMain = "LOBBY";
+  // const titleMain = "LOBBY";
 
   useEffect(() => {
     dispatch(clear());
-    GameHandler.onStartGame((data) => {
+    GameHandler.onStartGame(() => {
       navigate(`/room/${GameHandler.getRoomID()}`);
     });
   }, []);
